@@ -1,9 +1,7 @@
-name: CLI testing
+name: Sample
 on:
   workflow_dispatch:
     inputs:
-      environment:
-        required: true
       username:
         required: true
         description: LT Username
