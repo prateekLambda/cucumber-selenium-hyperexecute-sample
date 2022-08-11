@@ -1,0 +1,63 @@
+name: CLI testing
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        required: true
+      username:
+        required: true
+        description: LT Username
+      accessKey:
+        description: LT Access Key
+        required: true
+      sampleRepoLink:
+        description: Link to the HyperExecute sample repo
+        default: https://github.com/LambdaTest/cucumber-selenium-hyperexecute-sample.git
+        required: true
+jobs:
+  test-hyperexecute-cli:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+
+      - name: Starting CLI testing
+        shell: bash
+        run: |
+          echo "STEP 1 ) Downloading sample suite"
+          git clone ${{ github.event.inputs.sampleRepoLink }}
+          echo "STEP 2) Download CLI and setting environment variables"
+          if [[ "$RUNNER_OS" == "Linux" ]]; then
+              chmod +x hyperexecute
+              export LT_USERNAME=${{ github.event.inputs.username }}
+              export LT_ACCESS_KEY=${{ github.event.inputs.accessKey }}
+              echo "Performing test"
+              cp hyperexecute cucumber-selenium-hyperexecute-sample/
+              cd cucumber-selenium-hyperexecute-sample
+              ./hyperexecute --user $LT_USERNAME --key $LT_ACCESS_KEY --config yaml/linux/cucumber_hyperexecute_autosplit_sample.yaml --download-artifacts --force-clean-artifacts --env ${{ github.event.inputs.environment }} 
+              echo "Test completion"
+          elif [[ "$RUNNER_OS" == "Windows" ]]; then
+              ls
+              cp hyperexecute.exe cucumber-selenium-hyperexecute-sample/
+              cd cucumber-selenium-hyperexecute-sample
+              ./hyperexecute --user $LT_USERNAME --key $LT_ACCESS_KEY --config yaml/win/cucumber_hyperexecute_autosplit_sample.yaml --download-artifacts --force-clean-artifacts --env ${{ github.event.inputs.environment }}
+              echo "Test completion"
+          elif [[ "$RUNNER_OS" == "macOS" ]]; then
+      
+              chmod +x hyperexecute
+              export LT_USERNAME=${{ github.event.inputs.username }}
+              export LT_ACCESS_KEY=${{ github.event.inputs.accessKey }}
+              echo "Performing test"
+              cp hyperexecute cucumber-selenium-hyperexecute-sample/
+              cd cucumber-selenium-hyperexecute-sample
+              ./hyperexecute --user $LT_USERNAME --key $LT_ACCESS_KEY --config yaml/mac/cucumber_hyperexecute_autosplit_sample.yaml --download-artifacts --force-clean-artifacts --env ${{ github.event.inputs.environment }}
+              echo "Test completion"
+          else
+              echo "$RUNNER_OS not supported"
+              exit 1
+          fi
