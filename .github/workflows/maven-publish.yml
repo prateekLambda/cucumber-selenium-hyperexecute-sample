@@ -42,5 +42,7 @@ jobs:
               ./hyperexecute --user $LT_USERNAME --key $LT_ACCESS_KEY --config yaml/win/cucumber_hyperexecute_autosplit_sample.yaml --download-artifacts --force-clean-artifacts --labels $jobLabel
               cd .hyperexecute
               ls -la
-              jq .summary.job_link result.json > out.tmp | cat out.tmp
+              jq .summary.job_link result.json>out.tmp
+              ls -la
+              cat out.tmp
               echo "Test completion"
