@@ -36,7 +36,7 @@ public class ToDoSteps extends TestRunner
 	@Then("^add new item$")
 	public void add_new_item()
 	{
-	for (int=0;i<30;i++){
+	for (int i=0;i<30;i++){
 		driver.findElement(By.id("sampletodotext")).clear();
 		driver.findElement(By.id("sampletodotext")).sendKeys("Yey, Let's add it to list");
 		driver.findElement(By.id("addbutton")).click();
