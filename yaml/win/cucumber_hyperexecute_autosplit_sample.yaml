@@ -36,6 +36,6 @@ testDiscovery:
   mode: dynamic
   #Parallel execution at feature level
   #command: grep -rni 'Features' -e 'Feature:' | sed 's/.*://'
-  command: echo "@ToDo"
+  command: grep -nri '@' src/main/java/Features --include=\*.feature | sed 's/^.*://'
 
-testRunnerCommand: mvn test `-Dplatname=win `-Dmaven.repo.local=m2_cache_dir `-Dcucumber.options="--tags @ToDo"
+testRunnerCommand: mvn test `-Dplatname=win `-Dmaven.repo.local=m2_cache_dir `-Dcucumber.options="--tags $test"
