@@ -1,11 +1,9 @@
-Feature: SeleniumPlayground
-  Locate the Input Demo on the page
-  Add relevant data in the input form
+Feature: Add new item to ToDo list
 
-@SeleniumPlayground
-Scenario: Testing on Selenium Playground
-    Given I go to Selenium Playground home page
-    Then I Click on Input Form Link
-    Then I enter items in the form
-    When I click submit button
-    Then I should verify if form submission was successful
+@ToDo
+  Scenario: LambdaTest ToDo Scenario
+    Given user is on home Page
+    When select First Item
+    Then select second item
+    Then add new item
+    Then verify added item
