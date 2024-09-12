@@ -43,9 +43,9 @@ jobs:
               echo $jobLabel
               ./hyperexecute --user $LT_USERNAME --key $LT_ACCESS_KEY --config yaml/win/cucumber_hyperexecute_autosplit_sample.yaml --no-track --download-artifacts --force-clean-artifacts --labels $jobLabel
               cd .hyperexecute
-              jq .summary.job_link result.json>out.tmp
-              echo "HyperExecute Job Dashboard Link:"
-              cat out.tmp
+              # jq .summary.job_link result.json>out.tmp
+              # echo "HyperExecute Job Dashboard Link:"
+              # cat out.tmp
               echo "Test completion"
               
   Cucumber-Sample-Hyperexeucte-queued:
@@ -78,7 +78,7 @@ jobs:
               echo $jobLabel
               ./hyperexecute --user $LT_USERNAME --key $LT_ACCESS_KEY --config yaml/win/cucumber_hyperexecute_autosplit_sample.yaml --no-track --download-artifacts --force-clean-artifacts --labels $jobLabel
               cd .hyperexecute
-              jq .summary.job_link result.json>out.tmp
-              echo "HyperExecute Job Dashboard Link:"
-              cat out.tmp
+              # jq .summary.job_link result.json>out.tmp
+              # echo "HyperExecute Job Dashboard Link:"
+              # cat out.tmp
               echo "Test completion"
